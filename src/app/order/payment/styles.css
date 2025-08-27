@@ -1,0 +1,203 @@
+/* Estilos para a página de pagamento */
+
+/* Gradientes e cores */
+:root {
+  --nebula-purple: #6d28d9;
+  --nebula-blue: #2563eb;
+  --nebula-dark: #0f172a;
+  --nebula-space: #020617;
+  --nebula-glow: rgba(139, 92, 246, 0.5);
+}
+
+/* Container principal com gradiente espacial */
+.payment-container {
+  background: linear-gradient(135deg, var(--nebula-dark) 0%, var(--nebula-space) 100%);
+  border-radius: 1rem;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* Efeito de brilho nos cards */
+.payment-card {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.payment-card:hover {
+  box-shadow: 0 0 15px var(--nebula-glow);
+  transform: translateY(-2px);
+}
+
+.payment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--nebula-purple), var(--nebula-blue));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.payment-card:hover::before {
+  opacity: 1;
+}
+
+/* Botões com efeito de brilho */
+.nebula-button {
+  background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-blue));
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.nebula-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.nebula-button:hover::before {
+  left: 100%;
+}
+
+/* QR Code com efeito de brilho */
+.qr-container {
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  position: relative;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.qr-container:hover {
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.5);
+}
+
+/* Animação para o progresso de criação */
+.progress-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--nebula-purple), var(--nebula-blue));
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Ícones com animação de pulso */
+.icon-pulse {
+  animation: icon-pulse 2s infinite;
+}
+
+@keyframes icon-pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}
+
+/* Alertas com borda brilhante */
+.nebula-alert {
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.nebula-alert::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--nebula-purple), transparent);
+  animation: alert-border-flow 3s infinite;
+}
+
+@keyframes alert-border-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+/* Separador com gradiente */
+.nebula-separator {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+  margin: 1.5rem 0;
+}
+
+/* Animação para textos importantes */
+.text-glow {
+  animation: text-glow 2s infinite alternate;
+}
+
+@keyframes text-glow {
+  from {
+    text-shadow: 0 0 2px rgba(139, 92, 246, 0.5);
+  }
+  to {
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
+  }
+}
+
+/* Compatibilidade com o efeito de estrelas */
+.payment-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}

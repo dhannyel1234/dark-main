@@ -1,0 +1,116 @@
+/* Estilos simplificados para a página de pedidos */
+
+/* Animação simples de fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Transições suaves para botões */
+.smooth-transition {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efeito de hover sutil para cards */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo para planos em destaque */
+.plan-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-highlight::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Layout responsivo otimizado */
+@media (max-width: 768px) {
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .plan-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .plan-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Estilo para indicador de loading */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estilo para badges de status */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+}
+
+.status-available {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: rgb(34, 197, 94);
+}
+
+.status-unavailable {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(239, 68, 68);
+}
+
+.status-selected {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: rgb(59, 130, 246);
+}

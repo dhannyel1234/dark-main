@@ -1,0 +1,92 @@
+/* Estilos para a página de termos */
+
+/* Animação de estrelas para o fundo */
+.stars-small,
+.stars-medium,
+.stars-large {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  z-index: 1;
+}
+
+.stars-small {
+  opacity: 0.3;
+  animation: stars-move-small 150s linear infinite;
+}
+
+.stars-medium {
+  opacity: 0.2;
+  animation: stars-move-medium 200s linear infinite;
+}
+
+.stars-large {
+  opacity: 0.1;
+  animation: stars-move-large 250s linear infinite;
+}
+
+@keyframes stars-move-small {
+  0% {
+    background-position: 0 0, 40px 60px, 130px 270px;
+  }
+  100% {
+    background-position: 550px 550px, 390px 410px, 380px 520px;
+  }
+}
+
+@keyframes stars-move-medium {
+  0% {
+    background-position: 0 0, 40px 60px, 130px 270px;
+  }
+  100% {
+    background-position: 350px 350px, 390px 410px, 380px 520px;
+  }
+}
+
+@keyframes stars-move-large {
+  0% {
+    background-position: 0 0, 40px 60px, 130px 270px;
+  }
+  100% {
+    background-position: 250px 250px, 290px 310px, 380px 520px;
+  }
+}
+
+/* Animação de flutuação para elementos */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Estilo para cards com hover */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}

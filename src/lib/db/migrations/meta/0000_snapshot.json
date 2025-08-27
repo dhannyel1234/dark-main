@@ -1,0 +1,1660 @@
+{
+  "id": "5dacac77-9a9a-49e1-90cc-65b63a0ddbed",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.ai_config": {
+      "name": "ai_config",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "service": {
+          "name": "service",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "api_key": {
+          "name": "api_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "model": {
+          "name": "model",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "config": {
+          "name": "config",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.auto_queue": {
+      "name": "auto_queue",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "plan_id": {
+          "name": "plan_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "machine_id": {
+          "name": "machine_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_slot_id": {
+          "name": "current_slot_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position_in_queue": {
+          "name": "position_in_queue",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "auto_queue_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'waiting'"
+        },
+        "session_duration_minutes": {
+          "name": "session_duration_minutes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "time_remaining_minutes": {
+          "name": "time_remaining_minutes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spot_warning_sent": {
+          "name": "spot_warning_sent",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "entered_queue_at": {
+          "name": "entered_queue_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_started_at": {
+          "name": "session_started_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_ended_at": {
+          "name": "session_ended_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_activity_at": {
+          "name": "last_activity_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auto_queue_user_id_profiles_id_fk": {
+          "name": "auto_queue_user_id_profiles_id_fk",
+          "tableFrom": "auto_queue",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "auto_queue_plan_id_plans_id_fk": {
+          "name": "auto_queue_plan_id_plans_id_fk",
+          "tableFrom": "auto_queue",
+          "tableTo": "plans",
+          "columnsFrom": [
+            "plan_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "auto_queue_machine_id_machines_id_fk": {
+          "name": "auto_queue_machine_id_machines_id_fk",
+          "tableFrom": "auto_queue",
+          "tableTo": "machines",
+          "columnsFrom": [
+            "machine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "auto_queue_current_slot_id_time_slots_id_fk": {
+          "name": "auto_queue_current_slot_id_time_slots_id_fk",
+          "tableFrom": "auto_queue",
+          "tableTo": "time_slots",
+          "columnsFrom": [
+            "current_slot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.coupon_usages": {
+      "name": "coupon_usages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "coupon_id": {
+          "name": "coupon_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payment_id": {
+          "name": "payment_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "original_amount": {
+          "name": "original_amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "discount_amount": {
+          "name": "discount_amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "final_amount": {
+          "name": "final_amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "coupon_usages_coupon_id_coupons_id_fk": {
+          "name": "coupon_usages_coupon_id_coupons_id_fk",
+          "tableFrom": "coupon_usages",
+          "tableTo": "coupons",
+          "columnsFrom": [
+            "coupon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "coupon_usages_user_id_profiles_id_fk": {
+          "name": "coupon_usages_user_id_profiles_id_fk",
+          "tableFrom": "coupon_usages",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "coupon_usages_payment_id_payments_id_fk": {
+          "name": "coupon_usages_payment_id_payments_id_fk",
+          "tableFrom": "coupon_usages",
+          "tableTo": "payments",
+          "columnsFrom": [
+            "payment_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.coupons": {
+      "name": "coupons",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "discount_type": {
+          "name": "discount_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "discount_value": {
+          "name": "discount_value",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "max_uses": {
+          "name": "max_uses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_uses": {
+          "name": "current_uses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "minimum_order_value": {
+          "name": "minimum_order_value",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "applicable_plans": {
+          "name": "applicable_plans",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "coupons_code_unique": {
+          "name": "coupons_code_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "code"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.invoices": {
+      "name": "invoices",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payment_id": {
+          "name": "payment_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "invoice_data": {
+          "name": "invoice_data",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pending'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "invoices_user_id_profiles_id_fk": {
+          "name": "invoices_user_id_profiles_id_fk",
+          "tableFrom": "invoices",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "invoices_payment_id_payments_id_fk": {
+          "name": "invoices_payment_id_payments_id_fk",
+          "tableFrom": "invoices",
+          "tableTo": "payments",
+          "columnsFrom": [
+            "payment_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.machines": {
+      "name": "machines",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "azure_vm_id": {
+          "name": "azure_vm_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "azure_vm_name": {
+          "name": "azure_vm_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location": {
+          "name": "location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "size": {
+          "name": "size",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "azure_status": {
+          "name": "azure_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "system_status": {
+          "name": "system_status",
+          "type": "vm_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'maintenance'"
+        },
+        "public_ip": {
+          "name": "public_ip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "private_ip": {
+          "name": "private_ip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plan_id": {
+          "name": "plan_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_registered": {
+          "name": "is_registered",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "reserved_by": {
+          "name": "reserved_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reserved_reason": {
+          "name": "reserved_reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "config": {
+          "name": "config",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "machines_owner_id_profiles_id_fk": {
+          "name": "machines_owner_id_profiles_id_fk",
+          "tableFrom": "machines",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "machines_plan_id_plans_id_fk": {
+          "name": "machines_plan_id_plans_id_fk",
+          "tableFrom": "machines",
+          "tableTo": "plans",
+          "columnsFrom": [
+            "plan_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "machines_reserved_by_profiles_id_fk": {
+          "name": "machines_reserved_by_profiles_id_fk",
+          "tableFrom": "machines",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "reserved_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "machines_name_unique": {
+          "name": "machines_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.maintenance": {
+      "name": "maintenance",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "started_by": {
+          "name": "started_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ended_at": {
+          "name": "ended_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "maintenance_started_by_profiles_id_fk": {
+          "name": "maintenance_started_by_profiles_id_fk",
+          "tableFrom": "maintenance",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "started_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.payments": {
+      "name": "payments",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "plan_id": {
+          "name": "plan_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "payment_id": {
+          "name": "payment_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gateway": {
+          "name": "gateway",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "payment_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pending'"
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currency": {
+          "name": "currency",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'BRL'"
+        },
+        "payment_method": {
+          "name": "payment_method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "transaction_data": {
+          "name": "transaction_data",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "webhook_received_at": {
+          "name": "webhook_received_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "confirmed_at": {
+          "name": "confirmed_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "payments_user_id_profiles_id_fk": {
+          "name": "payments_user_id_profiles_id_fk",
+          "tableFrom": "payments",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payments_plan_id_plans_id_fk": {
+          "name": "payments_plan_id_plans_id_fk",
+          "tableFrom": "payments",
+          "tableTo": "plans",
+          "columnsFrom": [
+            "plan_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.plans": {
+      "name": "plans",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "duration_days": {
+          "name": "duration_days",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "provisioning_type": {
+          "name": "provisioning_type",
+          "type": "provisioning_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'individual'"
+        },
+        "individual_stock": {
+          "name": "individual_stock",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 10
+        },
+        "stock_pool_id": {
+          "name": "stock_pool_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "highlight_color": {
+          "name": "highlight_color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vm_config": {
+          "name": "vm_config",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "plans_stock_pool_id_stock_pools_id_fk": {
+          "name": "plans_stock_pool_id_stock_pools_id_fk",
+          "tableFrom": "plans",
+          "tableTo": "stock_pools",
+          "columnsFrom": [
+            "stock_pool_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "plans_name_unique": {
+          "name": "plans_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.profiles": {
+      "name": "profiles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "full_name": {
+          "name": "full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avatar_url": {
+          "name": "avatar_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "website": {
+          "name": "website",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "admin_level": {
+          "name": "admin_level",
+          "type": "admin_level",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'user'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.queue": {
+      "name": "queue",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "queue_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'waiting'"
+        },
+        "plan_name": {
+          "name": "plan_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "plan_type": {
+          "name": "plan_type",
+          "type": "plan_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "plan_duration": {
+          "name": "plan_duration",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plan_start_time": {
+          "name": "plan_start_time",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plan_end_time": {
+          "name": "plan_end_time",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "machine_assigned": {
+          "name": "machine_assigned",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activated_at": {
+          "name": "activated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "queue_user_id_profiles_id_fk": {
+          "name": "queue_user_id_profiles_id_fk",
+          "tableFrom": "queue",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stock_pools": {
+      "name": "stock_pools",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.time_slots": {
+      "name": "time_slots",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "machine_id": {
+          "name": "machine_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plan_id": {
+          "name": "plan_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "start_time": {
+          "name": "start_time",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "end_time": {
+          "name": "end_time",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "duration_minutes": {
+          "name": "duration_minutes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "slot_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'available'"
+        },
+        "auto_created": {
+          "name": "auto_created",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "user_disk_snapshot": {
+          "name": "user_disk_snapshot",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "original_disk_snapshot": {
+          "name": "original_disk_snapshot",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "time_slots_machine_id_machines_id_fk": {
+          "name": "time_slots_machine_id_machines_id_fk",
+          "tableFrom": "time_slots",
+          "tableTo": "machines",
+          "columnsFrom": [
+            "machine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "time_slots_user_id_profiles_id_fk": {
+          "name": "time_slots_user_id_profiles_id_fk",
+          "tableFrom": "time_slots",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "time_slots_plan_id_plans_id_fk": {
+          "name": "time_slots_plan_id_plans_id_fk",
+          "tableFrom": "time_slots",
+          "tableTo": "plans",
+          "columnsFrom": [
+            "plan_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.user_plans": {
+      "name": "user_plans",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "plan_id": {
+          "name": "plan_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "plan_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'active'"
+        },
+        "activated_at": {
+          "name": "activated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cancel_date": {
+          "name": "cancel_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cancel_reason": {
+          "name": "cancel_reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "charge_id": {
+          "name": "charge_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payment_value": {
+          "name": "payment_value",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_in_queue": {
+          "name": "is_in_queue",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "queue_started_at": {
+          "name": "queue_started_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_queue_exit": {
+          "name": "last_queue_exit",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_plans_user_id_profiles_id_fk": {
+          "name": "user_plans_user_id_profiles_id_fk",
+          "tableFrom": "user_plans",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "user_plans_plan_id_plans_id_fk": {
+          "name": "user_plans_plan_id_plans_id_fk",
+          "tableFrom": "user_plans",
+          "tableTo": "plans",
+          "columnsFrom": [
+            "plan_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.admin_level": {
+      "name": "admin_level",
+      "schema": "public",
+      "values": [
+        "owner",
+        "admin",
+        "user"
+      ]
+    },
+    "public.auto_queue_status": {
+      "name": "auto_queue_status",
+      "schema": "public",
+      "values": [
+        "waiting",
+        "playing",
+        "spot_warning",
+        "completed"
+      ]
+    },
+    "public.payment_status": {
+      "name": "payment_status",
+      "schema": "public",
+      "values": [
+        "pending",
+        "paid",
+        "cancelled",
+        "refunded"
+      ]
+    },
+    "public.plan_status": {
+      "name": "plan_status",
+      "schema": "public",
+      "values": [
+        "active",
+        "cancelled",
+        "expired"
+      ]
+    },
+    "public.plan_type": {
+      "name": "plan_type",
+      "schema": "public",
+      "values": [
+        "automatico",
+        "queue"
+      ]
+    },
+    "public.provisioning_type": {
+      "name": "provisioning_type",
+      "schema": "public",
+      "values": [
+        "individual",
+        "queue_manual",
+        "queue_auto"
+      ]
+    },
+    "public.queue_status": {
+      "name": "queue_status",
+      "schema": "public",
+      "values": [
+        "waiting",
+        "active",
+        "completed"
+      ]
+    },
+    "public.slot_status": {
+      "name": "slot_status",
+      "schema": "public",
+      "values": [
+        "available",
+        "occupied",
+        "maintenance"
+      ]
+    },
+    "public.vm_status": {
+      "name": "vm_status",
+      "schema": "public",
+      "values": [
+        "available",
+        "occupied_queue",
+        "rented",
+        "reserved",
+        "maintenance"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
