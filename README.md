@@ -22,7 +22,7 @@
 profiles          -- Usuários com níveis de permissão (user/admin/owner)
 plans            -- Planos de assinatura com tipos de provisionamento
 user_plans       -- Assinaturas ativas dos usuários
-machines         -- VMs Azure com status e configurações
+machines         -- VMs Azure com status e configurações 
 queue            -- Sistema de fila básica (FIFO)
 auto_queue       -- Sistema de fila automática com sessões
 time_slots       -- Slots de tempo para fila automática
