@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { getDiscordUsername } from '@/lib/auth-hybrid'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -12,10 +13,17 @@ export async function GET(request: NextRequest) {
     if (!error && data.user) {
         // Sincronizar dados do perfil do Discord com a tabela `profiles`
         const { user } = data
+        
+        // Log para debug
+        console.log('Discord OAuth user_metadata:', user.user_metadata)
+        
+        const discordUsername = getDiscordUsername(user.user_metadata)
+        console.log('Discord username resolved to:', discordUsername)
+        
         const { error: profileError } = await supabase.from('profiles').upsert({
             id: user.id,
-            discord_username: user.user_metadata.user_name,
-            avatar_url: user.user_metadata.avatar_url,
+            discord_username: discordUsername,
+            avatar_url: user.user_metadata?.avatar_url,
             updated_at: new Date().toISOString()
         })
 
