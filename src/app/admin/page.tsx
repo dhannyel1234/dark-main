@@ -593,7 +593,7 @@ export default function Dashboard() {
                             {isLoading ? (
                                 <Skeleton className="h-7 w-28 ml-2" />
                             ) : (
-                                <span className="ml-2 text-2xl font-normal">{user?.user_metadata?.preferred_username || user?.user_metadata?.username || user?.user_metadata?.full_name}</span>
+                                <span className="ml-2 text-2xl font-normal">{user?.user_metadata.user_name}</span>
                             )}
                         </div>
                         <p className="text-gray-400">
@@ -754,7 +754,7 @@ export default function Dashboard() {
                                                                     "embeds": [
                                                                         {
                                                                             "author": {
-                                                                                "name": `${user?.user_metadata?.preferred_username || user?.user_metadata?.username || user?.user_metadata?.full_name} - ${user?.id}`,
+                                                                                "name": `${user?.user_metadata.user_name} - ${user?.id}`,
                                                                                 "icon_url": user?.user_metadata.avatar_url
                                                                             },
                                                                             "title": `Implantando Máquina`,
@@ -930,7 +930,7 @@ export default function Dashboard() {
                                                                                                 "embeds": [
                                                                                                     {
                                                                                                         "author": {
-                                                                                                            "name": `${user?.user_metadata?.preferred_username || user?.user_metadata?.username || user?.user_metadata?.full_name} - ${user?.id}`,
+                                                                                                            "name": `${user?.user_metadata.user_name} - ${user?.id}`,
                                                                                                             "icon_url": user?.user_metadata.avatar_url
                                                                                                         },
                                                                                                         "title": `Atualizando Plano`,
@@ -1040,7 +1040,7 @@ export default function Dashboard() {
                                                                                                 "embeds": [
                                                                                                     {
                                                                                                         "author": {
-                                                                                                            "name": `${user?.user_metadata?.preferred_username || user?.user_metadata?.username || user?.user_metadata?.full_name} - ${user?.id}`,
+                                                                                                            "name": `${user?.user_metadata.user_name} - ${user?.id}`,
                                                                                                             "icon_url": user?.user_metadata.avatar_url
                                                                                                         },
                                                                                                         "title": `Deletando Máquina`,
@@ -1107,7 +1107,7 @@ export default function Dashboard() {
                                                                                                 "embeds": [
                                                                                                     {
                                                                                                         "author": {
-                                                                                                            "name": `${user?.user_metadata?.preferred_username || user?.user_metadata?.username || user?.user_metadata?.full_name} - ${user?.id}`,
+                                                                                                            "name": `${user?.user_metadata.user_name} - ${user?.id}`,
                                                                                                             "icon_url": user?.user_metadata.avatar_url
                                                                                                         },
                                                                                                         "title": `Removendo Associação`,
@@ -1193,7 +1193,7 @@ export default function Dashboard() {
                                                                                     "embeds": [
                                                                                         {
                                                                                             "author": {
-                                                                                                "name": `${user?.user_metadata?.preferred_username || user?.user_metadata?.username || user?.user_metadata?.full_name} - ${user?.id}`,
+                                                                                                "name": `${user?.user_metadata.user_name} - ${user?.id}`,
                                                                                                 "icon_url": user?.user_metadata.avatar_url
                                                                                             },
                                                                                             "title": `Excluindo Fatura`,

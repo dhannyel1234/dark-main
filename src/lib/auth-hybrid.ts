@@ -15,13 +15,6 @@ export interface AuthenticatedUser {
 }
 
 /**
- * Get Discord username from user metadata with fallback options
- */
-export function getDiscordUsername(userMetadata: any): string | undefined {
-  return userMetadata?.preferred_username || userMetadata?.username || userMetadata?.full_name;
-}
-
-/**
  * Authentication utility that uses Supabase for auth and profile data
  */
 export class AuthHybrid {
@@ -133,7 +126,7 @@ export class AuthHybrid {
           .from('profiles')
           .insert({
             id: user.id,
-            discord_username: getDiscordUsername(user.user_metadata),
+            discord_username: user.user_metadata?.preferred_username || user.user_metadata?.username,
             avatar_url: user.user_metadata?.avatar_url,
             admin_level: 'user',
             updated_at: new Date().toISOString(),

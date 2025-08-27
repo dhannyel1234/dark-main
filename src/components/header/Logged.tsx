@@ -192,7 +192,7 @@ export default function LoggedComponent({ user, profile }: LoggedProps) {
                         <div className="relative w-8 h-8 rounded-full overflow-hidden">
                             <Image
                                 src={user.user_metadata.avatar_url || '/darkcloud.png'}
-                                alt={user.user_metadata?.preferred_username || user.user_metadata?.username || user.user_metadata?.full_name || 'User Avatar'}
+                                alt={user.user_metadata.user_name || 'User Avatar'}
                                 fill
                                 sizes="32px"
                                 className="object-cover"
