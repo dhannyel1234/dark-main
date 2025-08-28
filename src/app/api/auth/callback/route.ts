@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
             console.error("Erro ao garantir perfil:", profileError)
             // Se falhar ao criar/atualizar profile, desloga o usuário
             await supabase.auth.signOut()
-            return NextResponse.redirect(new URL('https://darkcloud.store/?error=profile_sync_failed'))
+            return NextResponse.redirect(new URL('https://darkcloud.store/?error=profile_sync_failed')) 
         }
     }
   }
