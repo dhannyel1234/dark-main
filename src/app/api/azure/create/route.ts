@@ -195,6 +195,13 @@ if (!user.profile || user.profile.admin_level !== 'owner') {
                 createOption: 'Attach',
                 managedDisk: { id: disk.id }
             }
+        },
+        securityProfile: {
+            securityType: 'TrustedLaunch',
+            uefiSettings: {
+                secureBootEnabled: true,
+                vTpmEnabled: true
+            }
         }
     };
     const machine = await computeClient.virtualMachines.beginCreateOrUpdateAndWait(
