@@ -10,6 +10,7 @@ import Feedbacks from '@/components/feedbacks';
 import Plans from '@/components/plans';
 import { useEffect, useState } from 'react';
 import PromotionBanner from '@/components/PromotionBanner';
+import './blur-effect.css';
 
 export default function Home() {
   const router = useRouter();
@@ -92,22 +93,22 @@ const videos = [
   
   const features = [
     {
-      icon: <MonitorPlay className="h-5 w-5 text-[#9D86F9]" />,
+      icon: <MonitorPlay className="h-5 w-5 text-[#3B82F6]" />,
       title: "Jogue em qualquer dispositivo",
       description: "Acesse sua máquina virtual de qualquer lugar, em qualquer dispositivo com conexão à internet."
     },
     {
-      icon: <Cpu className="h-5 w-5 text-[#9D86F9]" />,
+      icon: <Cpu className="h-5 w-5 text-[#3B82F6]" />,
       title: "Hardware de alto desempenho",
       description: "Equipamentos de última geração para rodar seus jogos com gráficos impressionantes e alta taxa de quadros."
     },
     {
-      icon: <Server className="h-5 w-5 text-[#9D86F9]" />,
+      icon: <Server className="h-5 w-5 text-[#3B82F6]" />,
       title: "Baixa latência",
       description: "Servidores estrategicamente posicionados para garantir a menor latência possível durante suas sessões de jogo."
     },
     {
-      icon: <HardDrive className="h-5 w-5 text-[#9D86F9]" />,
+      icon: <HardDrive className="h-5 w-5 text-[#3B82F6]" />,
       title: "Armazenamento dedicado",
       description: "Espaço de armazenamento exclusivo para instalar seus jogos favoritos e salvar seu progresso."
     }
@@ -139,35 +140,70 @@ const videos = [
       <AnimatePresence>
         {isLoaded && (
           <section className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden pt-32">
+            {/* Imagem direita animada */}
+            <div className="absolute right-[15%] top-1/2 -translate-y-1/2 z-10 pointer-events-none">
+              {/* Efeito de blur redondo posicionado atrás da imagem - menor e mais para cima */}
+              <div 
+                className="blur-pulse-effect w-[250px] h-[250px]" 
+                style={{position: 'absolute', right: '100px', top: '25%', transform: 'translateY(-50%)'}}
+              />
+              
+              {/* Segundo efeito de blur para profundidade - menor e mais para cima */}
+              <div 
+                className="blur-pulse-effect-secondary w-[200px] h-[200px]" 
+                style={{position: 'absolute', right: '125px', top: '25%', transform: 'translateY(-50%)'}}
+              />
+              
+              {/* Imagem com animação */}
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.8 }}
+                className="animate-float-updown relative"
+                style={{zIndex: 2, position: 'relative'}}
+              >
+                <Image 
+                  src="/direita.png" 
+                  alt="Direita" 
+                  width={450} 
+                  height={750} 
+                  className="relative"
+                />
+              </motion.div>
+            </div>
             {/* Glow effect */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full animate-pulse" />
             
-            <div className="container mx-auto px-4 py-16 flex flex-col items-center text-center z-10">
+
+            
+            <div className="container mx-auto px-4 py-16 flex flex-col items-start text-left z-10">
               <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.4, 0.0, 0.2, 1] }}
-                className="max-w-3xl flex justify-center mb-4 flex-col items-center"
+                className="max-w-3xl flex mb-4 flex-col items-start"
               >
 
-                 <div className="inline-flex items-center justify-center gap-2 text-sm text-blue-300 px-4 py-2 rounded-full mb-6 hover:bg-blue-900/40 transition-all duration-300 group border border-blue-500/20">
-                <Image src="/darkcloud.png" alt="DarkCloud" width={16} height={16} className="text-blue-400 group-hover:text-blue-300 group-hover:animate-pulse" />
-                <span className="group-hover:text-blue-300 transition-colors duration-300">DarkCloud</span>
-              </div>
 
 
-                <div className="mb-4 flex justify-center">
+
+                <div className="inline-flex items-center gap-2 text-sm text-blue-300 px-4 py-2 rounded-full mb-6 hover:bg-blue-900/40 transition-all duration-300 group border border-blue-500/20">
+                  <Image src="/darkcloud.png" alt="DarkCloud" width={16} height={16} className="text-blue-400 group-hover:text-blue-300 group-hover:animate-pulse" />
+                  <span className="group-hover:text-blue-300 transition-colors duration-300">DarkCloud</span>
+                </div>
+
+
+                <div className="mb-4 flex">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: "6rem" }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="h-1 bg-blue-500/70 rounded-full"
+                    className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
                   />
                 </div>
                 
                 <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-                  Jogue em qualquer lugar com{" "}
-                  <motion.span 
+                  Jogue em qualquer lugar com <motion.span 
                     initial={{ opacity: 0, filter: "blur(8px)" }}
                     animate={{ opacity: 1, filter: "blur(0px)" }}
                     transition={{ duration: 1, delay: 0.5 }}
@@ -181,21 +217,29 @@ const videos = [
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.7 }}
-                  className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed"
+                  className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed"
                 >
-                  Acesse uma máquina virtual de alto desempenho e jogue seus títulos favoritos em qualquer dispositivo, 
-                  com gráficos impressionantes e baixa latência.
+                  A DarkCloud se esforça para se tornar a plataforma de nuvem definitiva para jogadores, criadores e empresas.
+                </motion.p>
+                
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                  className="text-xl text-gray-300 mb-8 max-w-xl"
+                >
+                  Acesse uma máquina virtual de alto desempenho e jogue seus títulos favoritos em qualquer dispositivo, com gráficos impressionantes e baixa latência.
                 </motion.p>
                 
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.9 }}
-                  className="flex flex-col sm:flex-row gap-6 justify-center"
+                  className="flex flex-col sm:flex-row gap-6"
                 >
                   <button 
                     onClick={() => router.push('/queue')}
-                    className="px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-blue-700/20 text-white hover:scale-105 bg-[#4B9EFF] hover:bg-[#4B9EFF]/90"
+                    className="px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-blue-700/20 text-white hover:scale-105 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
                   >
                     Ligar VM
                     <Power className="h-5 w-5 group-hover:rotate-12 transition-transform" />
@@ -215,16 +259,7 @@ const videos = [
                 </motion.div>
               </motion.div>
               
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9, y: 50 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.1, ease: [0.4, 0.0, 0.2, 1] }}
-                className="mt-20 relative w-full max-w-5xl mx-auto"
-              >
-                
-                
-                
-            </motion.div>
+
             </div>
           </section>
         )}
@@ -283,10 +318,10 @@ const videos = [
               <motion.div 
                 key={index}
                 variants={itemVariants}
-                className="border border-blue-500/10 rounded-lg p-3 transition-all duration-300 hover:shadow-lg hover:shadow-[#9D86F9]/20 hover:border-[#9D86F9]/30 group text-center"
+                className="border border-blue-500/10 rounded-lg p-3 transition-all duration-300 hover:shadow-lg hover:shadow-[#3B82F6]/20 hover:border-[#3B82F6]/30 group text-center"
                 whileHover={{ y: -10 }}
               >
-                <div className="w-8 h-8 rounded-lg border border-[#9D86F9]/20 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 mx-auto">
+                <div className="w-8 h-8 rounded-lg border border-[#3B82F6]/20 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 mx-auto">
                   {feature.icon}
                 </div>
                 <h3 className="text-sm font-semibold text-white mb-1">{feature.title}</h3>
@@ -322,7 +357,7 @@ const videos = [
                   key={index}
                   variants={itemVariants}
                   whileHover={{ y: -10 }}
-                  className="bg-gradient-to-br from-[#1A1A1A] to-black/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg shadow-[#9D86F9]/20 hover:border-[#9D86F9]/30 group"
+                  className="bg-gradient-to-br from-[#1A1A1A] to-black/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg shadow-[#3B82F6]/20 hover:border-[#3B82F6]/30 group"
                 >
                   <div className="relative aspect-video">
                     {playingVideo === video.videoId ? (
@@ -525,10 +560,10 @@ const videos = [
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
-              className="bg-gradient-to-br from-purple-950/20 to-black/70 backdrop-blur-lg border border-purple-500/10 rounded-2xl p-8 hover:shadow-lg hover:shadow-purple-500/20 hover:border-purple-500/30 transition-all duration-300"
+              className="bg-gradient-to-br from-blue-950/20 to-black/70 backdrop-blur-lg border border-blue-500/10 rounded-2xl p-8 hover:shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/30 transition-all duration-300"
             >
               <div className="flex items-center mb-6">
-                <div className="w-14 h-14 rounded-full bg-purple-900/20 border border-purple-500/20 flex items-center justify-center mr-5">
+                <div className="w-14 h-14 rounded-full bg-blue-900/20 border border-blue-500/20 flex items-center justify-center mr-5">
                   <Image 
                     src="/icons/Parsec.png" 
                     alt="Parsec Logo" 
@@ -557,12 +592,12 @@ const videos = [
                     viewport={{ once: true }}
                     className="flex items-start gap-3"
                   >
-                    <CheckCircle className="h-5 w-5 text-purple-400 shrink-0 mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
                     <span className="text-gray-300">{item}</span>
                   </motion.li>
                 ))}
               </ul>
-              <div className="bg-purple-950/30 border border-purple-900/30 rounded-lg p-4 mb-6">
+              <div className="bg-blue-950/30 border border-blue-900/30 rounded-lg p-4 mb-6">
                 <p className="text-white font-medium">
                   Ideal para: Usuários que priorizam facilidade de uso e compatibilidade ampla.
                 </p>
@@ -571,7 +606,7 @@ const videos = [
                 href="https://parsec.app/downloads" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

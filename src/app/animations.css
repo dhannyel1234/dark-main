@@ -47,6 +47,33 @@
 }
 
 /* Animação para as linhas diagonais do background */
+@keyframes float-updown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes blur-pulse {
+  0% {
+    filter: blur(60px);
+    opacity: 0.5;
+  }
+  50% {
+    filter: blur(80px);
+    opacity: 0.8;
+  }
+  100% {
+    filter: blur(60px);
+    opacity: 0.5;
+  }
+}
+
 @keyframes diagonal-lines-float {
   0% {
     transform: translateY(0) translateX(0);

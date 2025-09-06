@@ -1,0 +1,36 @@
+/* Efeito de blur pulsante reduzido */
+.blur-pulse-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(51, 161, 234, 0.9) 0%, rgba(59, 130, 246, 0.85) 50%, transparent 100%);
+  filter: blur(80px);
+  animation: blurPulse 4s ease-in-out infinite alternate;
+  z-index: 1;
+  box-shadow: 0 0 50px 25px rgba(147, 51, 234, 0.25);
+}
+
+.blur-pulse-effect-secondary {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(11, 76, 255, 0.9) 0%, rgba(11, 108, 255, 0.85) 50%, transparent 100%);
+  filter: blur(100px);
+  animation: blurPulse 5s ease-in-out infinite alternate;
+  animation-delay: 0.5s;
+  z-index: 1;
+  box-shadow: 0 0 40px 20px rgba(85, 142, 247, 0.25);
+}
+
+@keyframes blurPulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}

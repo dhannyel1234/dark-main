@@ -9,6 +9,7 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -82,11 +83,21 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+        'float-updown': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
+        'blur-pulse': {
+          '0%, 100%': { filter: 'blur(60px)', opacity: '0.5' },
+          '50%': { filter: 'blur(80px)', opacity: '0.8' },
+        },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+        'float-updown': 'float-updown 6s ease-in-out infinite',
+        'blur-pulse': 'blur-pulse 4s ease-in-out infinite'
   		}
   	}
   },

@@ -1,31 +1,31 @@
 'use client';
 
-import { Star, UserCheck } from 'lucide-react';
+import { Cloud, Star, UserCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const feedbacks = [
     {
-      avatarUrl: "https://images-ext-1.discordapp.net/external/rtI4Gj8ahDOL5ok8eZOjYute_0PWP8jXYtttydT7Ui8/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/295581943297474560/96ea80b9ae86bc2761b7ac3bcacba5b6.png?format=webp&quality=lossless&width=505&height=505",
-      name: "Rafasymon223",
-      date: "13/05/2025",
-      testimonial: "Entrega imediata da máquina, precisei de uma ajuda na madrugada, e o cidadão me atendeu com boa vontade, atendimento 10/10 sem dúvidas.",
+      avatarUrl: "https://cdn.discordapp.com/avatars/1214302144564297778/671ca403ff63f72825ade11aa7b03f80.webp?size=80",
+      name: "𝘴𝘦𝘯𝘵𝘳𝘺",
+      date: "28/08/2025",
+      testimonial: "Acabei de adquirir uma nova VM e fiquei SURPRESO com a velocidade na entrega e na configuração — tudo pronto em tempo recorde, sem dor de cabeça! Atendimento impecável — equipe super ágil, prestativa e sempre pronta para ajudar. Dá pra sentir que realmente se importam com o cliente e não medem esforços pra resolver qualquer coisa. Se você quer uma solução rápida, estável e com suporte de primeira, pode confiar na Dark Cloud. Experiência nota 10! DARK | Dhannyel vlw pelo atendimento 10/10",
       game: "🤍",
       link: "https://discord.com/channels/608503464443772938/1057382812489097247/1371706319144222851"
     },
     {
-      avatarUrl: "https://images-ext-1.discordapp.net/external/v9DIZVje6ZHUabPpzvs4fbuKOueMDGUQ0PuLm2tDjFs/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/692431990128902155/c3d47ccb3e4e481a7f28cdb7b3632660.png?format=webp&quality=lossless",
-      name: "Rzw'4m",
-      date: "11/05/2025",
-      testimonial: "O desempenho dessa máquina é excelente, todo o suporte é perfeito, sem delay nenhum na maquina e um ótimo desempenho em jogos !",
+      avatarUrl: "https://cdn.discordapp.com/avatars/1308154106824884300/a360433330c73c0e70b5ee629c2d034d.webp?size=80",
+      name: "Thomas Guerra",
+      date: "20/08/2025",
+      testimonial: "🚀 Quer performance, inovação e atendimento de verdade? Conheça a Dark Cloud! Adquiri a nova máquina  e fiquei IMPRESSIONADO com a velocidade e eficiência. Um verdadeiro salto de qualidade! 💻⚡✨ Atendimento nota 1000000 — rápido, atencioso e sempre pronto pra resolver qualquer coisa. Eles realmente se importam com o cliente!💰 Planos super acessíveis e soluções que cabem no seu bolso sem abrir mão da performance Se você busca qualidade de verdade e suporte de primeira, assina a Dark Cloud! Vale MUITO a pena! 🙌🔥#DarkCloud #Tecnologia #AtendimentoTop #Inovação #Performance #ValeAPena #SuportePremium",
       game: "🤍",
       link: "https://discord.com/channels/608503464443772938/1057382812489097247/1371004565000028200"
     },
     {
-      avatarUrl: "https://images-ext-1.discordapp.net/external/ZKVXPDdQxbb6Z4l25auu1bGc0uBgt5pJAFK73-KDouo/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/270314886859456512/40fd1cf04209b7f3c057020f4a303c5e.png?format=webp&quality=lossless&width=505&height=505",
-      name: "Suuna",
-      date: "16/05/2025",
-      testimonial: "Máquina boa, sem delay, sem queda no desempenho, principalmente caso utilize para trabalhar com Photoshop ou edição de vídeo, para jogos, as vezes dá uma queda de FPS, mas nada muito gritante.",
+      avatarUrl: "https://cdn.discordapp.com/avatars/738886608786554930/e269dbab970620f76bb67f3a03d8c45f.webp?size=80",
+      name: "Andro",
+      date: "04/09/2025",
+      testimonial: "@DARK | Marcos e @DARK | Dhannyel estão de parabéns pelo atendimento e por essas máquinas excelentes, não é a primeira vez que adquiro o plano, então voltei pra usufruir daquilo que dá certo. 100000/10",
       game: "🤍",
       link: "https://discord.com/channels/608503464443772938/1057382812489097247/1373027273585987686"
     }

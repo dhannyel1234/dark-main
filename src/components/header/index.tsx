@@ -76,7 +76,7 @@ export default function Header() {
                 <motion.div 
                     className={`
                         relative rounded-xl flex items-center justify-between
-                        backdrop-blur-md bg-transparent/70 border border-[#0e1a29]
+                        backdrop-blur-md bg-transparent border border-blue-500/60
                         px-4 ${scrolled ? 'h-30' : 'h-16'} max-w-4xl mx-auto
                     `}
                     initial={{ opacity: 0.9, y: -5 }}
