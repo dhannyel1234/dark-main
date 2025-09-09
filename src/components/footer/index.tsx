@@ -151,7 +151,8 @@ export default function Footer() {
                             { label: "Suporte", href: "#suporte" },
                             { label: "FAQ", href: "#faq" },
                             { label: "Termos de Uso", href: "/terms" },
-                            { label: "Política de Privacidade", href: "/privacy" }
+                            { label: "Política de Privacidade", href: "/privacy" },
+                            { label: "Política de Reembolso", href: "/refund" }
                         ].map((item, index) => (
                             <motion.a
                                 key={index}
@@ -173,14 +174,14 @@ export default function Footer() {
                     >
                         <MoonStar className="h-4 w-4 text-blue-400 group-hover:text-blue-300 transition-all duration-300" />
                         <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-all duration-300">
-                            &copy; {new Date().getFullYear()} POR DARK CLOUD STORE - CNPJ: 55.566.105/0001-02. Suporte{" "}
+                            &copy; {new Date().getFullYear()} POR DARK CLOUD STORE - CNPJ: 55.566.105/0001-02.{" "}
                             <a
                                 href="https://discord.com/users/1025178617069707286"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-400 hover:text-blue-300 transition-all duration-300"
                             >
-                                @sb4z7
+                                
                             </a>
                         </p>
                     </motion.div>
