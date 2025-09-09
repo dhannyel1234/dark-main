@@ -152,6 +152,7 @@ export default function Footer() {
                             { label: "FAQ", href: "#faq" },
                             { label: "Termos de Uso", href: "/terms" },
                             { label: "Política de Privacidade", href: "/privacy" },
+                            { label: "Política de Cookies", href: "/cookies" },
                             { label: "Política de Reembolso", href: "/refund" }
                         ].map((item, index) => (
                             <motion.a
