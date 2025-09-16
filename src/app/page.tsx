@@ -238,7 +238,7 @@ const videos = [
                   className="flex flex-col sm:flex-row gap-6"
                 >
                   <button 
-                    onClick={() => router.push('/queue')}
+                    onClick={() => window.open('https://darkfilas.com', '_blank')}
                     className="px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-blue-700/20 text-white hover:scale-105 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
                   >
                     Ligar VM
