@@ -2,7 +2,7 @@ export function validateCPF(cpf: string): boolean {
     const cpfClean = cpf.replace(/[^\d]/g, '');
 
     if (cpfClean.length !== 11 || /^(\d)\1+$/.test(cpfClean)) {
-        return false;
+        return false; 
     }
 
     let sum = 0;
